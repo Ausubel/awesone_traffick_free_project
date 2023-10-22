@@ -1,0 +1,564 @@
+{
+	"fugitives": [
+		{
+			"id": 1,
+			"name": "Juan",
+			"surname": "Pérez",
+			"dni": "09080706",
+			"dateOfBirth": "1990-05-15",
+			"reward": 10000,
+			"captured": false
+		},
+		{
+			"id": 2,
+			"name": "María",
+			"surname": "González",
+			"dni": "09123456",
+			"dateOfBirth": "1985-08-22",
+			"reward": 15000,
+			"captured": false
+		},
+		{
+			"id": 3,
+			"name": "Luis",
+			"surname": "Rodríguez",
+			"dni": "08012345",
+			"dateOfBirth": "1982-11-10",
+			"reward": 20000,
+			"captured": false
+		},
+		{
+			"id": 4,
+			"name": "Ana",
+			"surname": "Martínez",
+			"dni": "10098765",
+			"dateOfBirth": "1995-04-03",
+			"reward": 8000,
+			"captured": false
+		},
+		{
+			"id": 5,
+			"name": "Pedro",
+			"surname": "López",
+			"dni": "11011112",
+			"dateOfBirth": "1988-07-18",
+			"reward": 25000,
+			"captured": false
+		},
+		{
+			"id": 6,
+			"name": "Laura",
+			"surname": "Ramírez",
+			"dni": "12012122",
+			"dateOfBirth": "1993-09-26",
+			"reward": 12000,
+			"captured": false
+		},
+		{
+			"id": 7,
+			"name": "Carlos",
+			"surname": "Gómez",
+			"dni": "13013132",
+			"dateOfBirth": "1987-03-14",
+			"reward": 18000,
+			"captured": false
+		},
+		{
+			"id": 8,
+			"name": "Sofía",
+			"surname": "Fernández",
+			"dni": "14014142",
+			"dateOfBirth": "1998-01-09",
+			"reward": 11000,
+			"captured": false
+		},
+		{
+			"id": 9,
+			"name": "Javier",
+			"surname": "Díaz",
+			"dni": "15015152",
+			"dateOfBirth": "1984-06-30",
+			"reward": 17000,
+			"captured": false
+		},
+		{
+			"id": 10,
+			"name": "Carmen",
+			"surname": "Lara",
+			"dni": "16016162",
+			"dateOfBirth": "1992-12-12",
+			"reward": 22000,
+			"captured": false
+		},
+		{
+			"id": 11,
+			"name": "Ricardo",
+			"surname": "Mendoza",
+			"dni": "17017172",
+			"dateOfBirth": "1986-04-20",
+			"reward": 16000,
+			"captured": false
+		},
+		{
+			"id": 12,
+			"name": "Isabel",
+			"surname": "Torres",
+			"dni": "18018182",
+			"dateOfBirth": "1991-08-07",
+			"reward": 9000,
+			"captured": false
+		},
+		{
+			"id": 13,
+			"name": "Fernando",
+			"surname": "Sánchez",
+			"dni": "19019192",
+			"dateOfBirth": "1980-12-05",
+			"reward": 20000,
+			"captured": false
+		},
+		{
+			"id": 14,
+			"name": "Paola",
+			"surname": "García",
+			"dni": "20020102",
+			"dateOfBirth": "1994-02-15",
+			"reward": 14000,
+			"captured": false
+		},
+		{
+			"id": 15,
+			"name": "Miguel",
+			"surname": "Luna",
+			"dni": "21021122",
+			"dateOfBirth": "1983-07-29",
+			"reward": 22000,
+			"captured": false
+		},
+		{
+			"id": 16,
+			"name": "Cecilia",
+			"surname": "Vargas",
+			"dni": "22022132",
+			"dateOfBirth": "1997-03-18",
+			"reward": 11000,
+			"captured": false
+		},
+		{
+			"id": 17,
+			"name": "Raúl",
+			"surname": "Ortega",
+			"dni": "23023142",
+			"dateOfBirth": "1989-09-10",
+			"reward": 18000,
+			"captured": false
+		},
+		{
+			"id": 18,
+			"name": "Elena",
+			"surname": "Hernández",
+			"dni": "24024152",
+			"dateOfBirth": "1990-06-25",
+			"reward": 13000,
+			"captured": false
+		},
+		{
+			"id": 19,
+			"name": "Roberto",
+			"surname": "Castillo",
+			"dni": "25025162",
+			"dateOfBirth": "1987-11-12",
+			"reward": 19000,
+			"captured": false
+		},
+		{
+			"id": 20,
+			"name": "Vladimir",
+			"surname": "Cerron",
+			"dni": "10902217",
+			"dateOfBirth": "1975-11-12",
+			"reward": 30000,
+			"captured": false
+		}
+	],
+	"crimeType": [
+		{
+			"id": 1,
+			"description": "Robo a mano armada"
+		},
+		{
+			"id": 2,
+			"description": "Tráfico de drogas"
+		},
+		{
+			"id": 3,
+			"description": "Homicidio"
+		},
+		{
+			"id": 4,
+			"description": "Estafa"
+		},
+		{
+			"id": 5,
+			"description": "Secuestro"
+		},
+		{
+			"id": 6,
+			"description": "Extorsión"
+		},
+		{
+			"id": 7,
+			"description": "Abuso sexual"
+		},
+		{
+			"id": 8,
+			"description": "Negociación incompatible"
+		},
+		{
+			"id": 9,
+			"description": "Colusión"
+		}
+	],
+	"issuingAgency": [
+		{
+			"id": 1,
+			"name": "Policía Nacional del Perú"
+		},
+		{
+			"id": 2,
+			"name": "Ministerio Público"
+		},
+		{
+			"id": 3,
+			"name": "Interpol"
+		}
+	],
+	"fugitiveCrime": [
+		{
+			"id": 1,
+			"fugitiveId": 1,
+			"crimeTypeId": 1
+		},
+		{
+			"id": 2,
+			"fugitiveId": 2,
+			"crimeTypeId": 2
+		},
+		{
+			"id": 3,
+			"fugitiveId": 3,
+			"crimeTypeId": 3
+		},
+		{
+			"id": 4,
+			"fugitiveId": 4,
+			"crimeTypeId": 4
+		},
+		{
+			"id": 5,
+			"fugitiveId": 5,
+			"crimeTypeId": 1
+		},
+		{
+			"id": 6,
+			"fugitiveId": 6,
+			"crimeTypeId": 2
+		},
+		{
+			"id": 7,
+			"fugitiveId": 6,
+			"crimeTypeId": 3
+		},
+		{
+			"id": 8,
+			"fugitiveId": 6,
+			"crimeTypeId": 4
+		},
+		{
+			"id": 9,
+			"fugitiveId": 7,
+			"crimeTypeId": 1
+		},
+		{
+			"id": 10,
+			"fugitiveId": 8,
+			"crimeTypeId": 2
+		},
+		{
+			"id": 11,
+			"fugitiveId": 9,
+			"crimeTypeId": 3
+		},
+		{
+			"id": 12,
+			"fugitiveId": 9,
+			"crimeTypeId": 4
+		},
+		{
+			"id": 13,
+			"fugitiveId": 10,
+			"crimeTypeId": 1
+		},
+		{
+			"id": 14,
+			"fugitiveId": 10,
+			"crimeTypeId": 2
+		},
+		{
+			"id": 15,
+			"fugitiveId": 10,
+			"crimeTypeId": 3
+		},
+		{
+			"id": 16,
+			"fugitiveId": 11,
+			"crimeTypeId": 4
+		},
+		{
+			"id": 17,
+			"fugitiveId": 12,
+			"crimeTypeId": 1
+		},
+		{
+			"id": 18,
+			"fugitiveId": 12,
+			"crimeTypeId": 2
+		},
+		{
+			"id": 19,
+			"fugitiveId": 13,
+			"crimeTypeId": 3
+		},
+		{
+			"id": 20,
+			"fugitiveId": 14,
+			"crimeTypeId": 4
+		},
+		{
+			"id": 21,
+			"fugitiveId": 15,
+			"crimeTypeId": 1
+		},
+		{
+			"id": 22,
+			"fugitiveId": 15,
+			"crimeTypeId": 2
+		},
+		{
+			"id": 23,
+			"fugitiveId": 16,
+			"crimeTypeId": 3
+		},
+		{
+			"id": 24,
+			"fugitiveId": 17,
+			"crimeTypeId": 4
+		},
+		{
+			"id": 25,
+			"fugitiveId": 18,
+			"crimeTypeId": 1
+		},
+		{
+			"id": 26,
+			"fugitiveId": 18,
+			"crimeTypeId": 2
+		},
+		{
+			"id": 27,
+			"fugitiveId": 19,
+			"crimeTypeId": 3
+		},
+		{
+			"id": 28,
+			"fugitiveId": 19,
+			"crimeTypeId": 4
+		},
+		{
+			"id": 29,
+			"fugitiveId": 20,
+			"crimeTypeId": 8
+		},
+		{
+			"id": 30,
+			"fugitiveId": 20,
+			"crimeTypeId": 9
+		}
+	],
+	"arrestWarrant": [
+		{
+			"id": 1,
+			"fugitiveId": 1,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-08-10"
+		},
+		{
+			"id": 2,
+			"fugitiveId": 2,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-08-12"
+		},
+		{
+			"id": 3,
+			"fugitiveId": 3,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-08-14"
+		},
+		{
+			"id": 4,
+			"fugitiveId": 4,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-08-16"
+		},
+		{
+			"id": 5,
+			"fugitiveId": 5,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-08-18"
+		},
+		{
+			"id": 6,
+			"fugitiveId": 6,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-08-20"
+		},
+		{
+			"id": 7,
+			"fugitiveId": 6,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-08-22"
+		},
+		{
+			"id": 8,
+			"fugitiveId": 7,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-08-24"
+		},
+		{
+			"id": 9,
+			"fugitiveId": 8,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-08-26"
+		},
+		{
+			"id": 10,
+			"fugitiveId": 8,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-08-28"
+		},
+		{
+			"id": 11,
+			"fugitiveId": 9,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-08-30"
+		},
+		{
+			"id": 12,
+			"fugitiveId": 9,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-09-01"
+		},
+		{
+			"id": 13,
+			"fugitiveId": 10,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-09-03"
+		},
+		{
+			"id": 14,
+			"fugitiveId": 10,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-09-05"
+		},
+		{
+			"id": 15,
+			"fugitiveId": 10,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-09-07"
+		},
+		{
+			"id": 16,
+			"fugitiveId": 11,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-09-09"
+		},
+		{
+			"id": 17,
+			"fugitiveId": 12,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-09-11"
+		},
+		{
+			"id": 18,
+			"fugitiveId": 12,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-09-13"
+		},
+		{
+			"id": 19,
+			"fugitiveId": 13,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-09-15"
+		},
+		{
+			"id": 20,
+			"fugitiveId": 14,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-09-17"
+		},
+		{
+			"id": 21,
+			"fugitiveId": 15,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-09-19"
+		},
+		{
+			"id": 22,
+			"fugitiveId": 16,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-09-21"
+		},
+		{
+			"id": 23,
+			"fugitiveId": 16,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-09-23"
+		},
+		{
+			"id": 24,
+			"fugitiveId": 17,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-09-25"
+		},
+		{
+			"id": 25,
+			"fugitiveId": 18,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-09-27"
+		},
+		{
+			"id": 26,
+			"fugitiveId": 18,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-09-29"
+		},
+		{
+			"id": 27,
+			"fugitiveId": 19,
+			"issuingAgencyId": 1,
+			"issueDate": "2023-10-01"
+		},
+		{
+			"id": 28,
+			"fugitiveId": 19,
+			"issuingAgencyId": 2,
+			"issueDate": "2023-10-03"
+		},
+		{
+			"id": 29,
+			"fugitiveId": 20,
+			"issuingAgencyId": 3,
+			"issueDate": "2023-10-04"
+		}
+	]
+}
