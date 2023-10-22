@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql
+    restart: always
+    container_name: mydb
+    environment:
+      - MYSQL_ROOT_PASSWORD=intel
+      - MYSQL_INITDB_SKIP_TZINFO=yes
+      - MYSQL_DATABASE=transfermarket
+    ports:
+      - 3306:3306
+    volumes:
+      - ./migrations/scheme.sql:/docker-entrypoint-initdb.d/scheme.sql
+  
+  app:
+    container_name: node
+    build: .
+    depends_on:
+      - mysqldb
+    links:
+      - mysqldb
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=root
+      - DB_PASSWORD=intel
+      - DB_NAME=transfermarket
+      - DB_PORT=3306
