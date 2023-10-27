@@ -1,7 +1,9 @@
 USE mysql;
 
-CREATE DATABASE IF NOT EXISTS transfermarket;
--- DROP DATABASE transfermarket;
+DROP DATABASE IF EXISTS transfermarket;
+
+CREATE DATABASE transfermarket;
+
 USE transfermarket;
 
 
