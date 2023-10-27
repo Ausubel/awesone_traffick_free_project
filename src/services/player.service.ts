@@ -9,8 +9,8 @@ export default class PlayerService {
 	async getPlayers(): Promise<Player[]> {
 		return await this.playerModel.getPlayers();
 	}
-	findPlayer(playerId: number): Player {
-		return this.playerModel.findPlayer(playerId);
+	async findPlayer(playerId: number): Promise<Player[]> {
+		return await this.playerModel.findPlayerById(playerId);
 	}
 	addPlayer(Player: Player): Player {
 		return this.playerModel.addPlayer(Player);

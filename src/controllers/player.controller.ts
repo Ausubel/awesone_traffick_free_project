@@ -36,13 +36,13 @@ export default class PlayerController implements ControllerBase {
 	private onfindPlayer() {
 		this.router.get("/:id", (req, res) => {
 			const fugitiveId: number = parseInt(req.params.id);
-			const foundPlayer: Player =
+			/*const foundPlayer: Player =
 				this.fugitiveService.findPlayer(fugitiveId);
 			if (foundPlayer) {
 				res.json(foundPlayer);
 				return;
 			}
-			res.json({ message: "Player not found" });
+			res.json({ message: "Player not found" });*/
 		});
 	}
 	private onAddPlayer() {

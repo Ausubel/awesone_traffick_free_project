@@ -213,3 +213,20 @@ INSERT INTO transfer (id, player_id, origin_team_id, destination_team_id, transf
 (4, 4, 5, 6, 13000000.00, '2023-05-30', 2, 22000000.00),
 (5, 5, 6, 1, 10000000.00, '2023-09-10', 4, 16000000.00),
 (6, 6, 1, 2, 12000000.00, '2023-10-15', 3, 19000000.00);
+
+/* Stored Procedures */
+DROP PROCEDURE IF EXISTS get_all_players;
+DELIMITER //
+CREATE PROCEDURE get_all_players()
+BEGIN
+    SELECT * FROM player;
+END //
+
+DROP PROCEDURE IF EXISTS find_player_by_id;
+DELIMITER //
+CREATE PROCEDURE find_player_by_id(
+    IN _player_id INT
+)
+BEGIN
+    SELECT * FROM player WHERE id = _player_id;
+END //

@@ -1,30 +1,23 @@
-import Backend from "../Backend";
-import Player from "../entities/Player";
 
-export default class PlayerModel {
+import StoredProcedures from "../db/StoredProcedures";
+import Player from "../entities/Player";
+import ModelBase from "./ModelBase";
+import playerMapper from "./mappers/player.mapper";
+
+
+export default class PlayerModel  extends ModelBase{
 	async getPlayers(): Promise<Player[]> {
-		const [resultset] = await Backend.database.query(
-		  	"SELECT * FROM player;"
-		);
-		return resultset.map((record: any) => {
-			return {
-				id: record.id,
-				first_name: record.first_name,
-				last_name: record.last_name,
-				date_of_birth: record.date_of_birth,
-				market_value: record.market_value,
-				current_contract_id: record.current_contract_id,
-				current_agent_id: record.current_agent_id,
-				career_statistics_id: record.career_statistics_id,
-				country_id: record.country_id,
-			};
-		});
+		const [[resultset]] = (await this.database.query(
+			StoredProcedures.GetAllPlayers
+		)) as [[any[]]];
+		return resultset.map(playerMapper);
 	}
-	findPlayer(PlayerId: number): any {
-		// const foundPlayer = db
-		// 	.getPlayers()
-		// 	.find(({ id }) => id === PlayerId);
-		// return foundPlayer;
+	async findPlayerById(playerId: number): Promise<any> {
+		const [[resultset]] = (await this.database.query(
+			StoredProcedures.FindPlayerById
+			[playerId]
+		)) as [[any[]]];
+		return resultset.map(playerMapper);
 	}
 	addPlayer(Player: Player): any {
 		// const Players = db.getPlayers();
