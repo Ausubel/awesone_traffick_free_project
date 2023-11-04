@@ -170,7 +170,7 @@ BODY RESPONSE
 GET /api/team/{id}/all-transfers
 
 BODY RESPONSE
-{
+[
 	transfer_id: number;
 	origin_team: string;
 	players: [
@@ -180,5 +180,5 @@ BODY RESPONSE
 		transfer_fee: number;
 		contract_duration_season: int;
 		realease_clause: number
-		]
-}
+		];
+]
