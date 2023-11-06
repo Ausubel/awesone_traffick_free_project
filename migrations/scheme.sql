@@ -181,3 +181,11 @@ INSERT INTO transfer_contract (transfer_fee, contract_duraction_season, release_
   (50000000, 3, 75000000, 1, 1),
   (60000000, 4, 90000000, 2, 2),
   (3000000, 2, 5000000, 3, 3);
+
+/* Stored Procedures */
+DROP PROCEDURE IF EXISTS get_all_players;
+DELIMITER //
+CREATE PROCEDURE get_all_players()
+BEGIN
+    SELECT * FROM player;
+END //

@@ -134,21 +134,9 @@ BODY RESPONSE
 {
 	message: "Success"
 }
-10. Agregar un liga a un equipo existente
 
-POST /api/league/:id/add-team/?teamName
 
-BODY RESQUEST
-{
-	team_name: string
-}
-
-BODY RESPONSE
-{
-	message: "Success"
-}
-
-11. Transferir jugadores a equipo
+10. Transferir jugadores a equipo
 POST /api/transfer/new-transfer/to-team/{id}
 BODY RESQUEST
 [
@@ -166,7 +154,7 @@ BODY RESPONSE
 	message: "Success"
 }
 
-12. Obtener todas las tranferencias de un equipo
+11. Obtener todas las tranferencias de un equipo
 GET /api/team/{id}/all-transfers
 
 BODY RESPONSE
@@ -182,3 +170,17 @@ BODY RESPONSE
 		realease_clause: number
 		];
 ]
+
+12. Agregar un liga a un equipo existente ***
+
+POST /api/league/:id/add-team/?teamName
+
+BODY RESQUEST
+{
+	team_name: string
+}
+
+BODY RESPONSE
+{
+	message: "Success"
+}
