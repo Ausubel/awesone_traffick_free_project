@@ -189,3 +189,42 @@ CREATE PROCEDURE get_all_players()
 BEGIN
     SELECT * FROM player;
 END //
+
+DROP PROCEDURE IF EXISTS get_all_teams;
+DELIMITER //
+CREATE PROCEDURE get_all_teams()
+BEGIN
+    SELECT 
+      team.id,
+      team_name,
+      budget,
+      country.name as country,
+      league.league_name as league
+    FROM team INNER JOIN country ON team.country_id = country.id
+    INNER JOIN league ON team.league_id = league.id;
+END //
+
+DROP PROCEDURE IF EXISTS get_team_by_name;
+DELIMITER //
+CREATE PROCEDURE get_team_by_name(
+  IN _first_name INT
+)
+BEGIN
+    SELECT
+      team.id,
+      team_name,
+      budget,
+      country.name as country,
+      l1.league_name as league,
+      first_name,
+      last_name,
+      date_of_birth,
+      market_value
+    FROM team INNER JOIN contract ON team.id = contract.team_id
+    INNER JOIN country ON team.country_id = country.id
+    INNER JOIN league l1 ON team.league_id = l1.id
+    INNER JOIN current_contract ON contract.id = current_contract.contract_id
+    INNER JOIN player ON current_contract.player_id = player.id
+    INNER JOIN league l2 ON team.league_id = l2.id
+    WHERE first_name = _first_name;
+END//

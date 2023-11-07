@@ -1,6 +1,8 @@
 export enum StoredProcedures {
 	GetAllPlayers = "CALL get_all_players()",
-	GetTeams = "CALL get_all_teams()",
+	GetAllTeams = "CALL get_all_teams()",
+	GetTeamByName = "CALL get_team_by_name(?)",
 }
 
 export default StoredProcedures;
+	

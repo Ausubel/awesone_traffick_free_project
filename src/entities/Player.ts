@@ -4,10 +4,10 @@ type Player = {
     lastName: string;
     dateOfBirth: Date;
     marketValue: number;
-    currentContractId: number;
-    currentAgentId: number;
-    careerStatisticsId: number;
-    countryId: number;
+    currentContractId?: number;
+    currentAgentId?: number;
+    careerStatisticsId?: number;
+    countryId?: number;
 };
 
 export default Player;

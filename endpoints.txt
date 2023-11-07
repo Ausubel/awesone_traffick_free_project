@@ -100,7 +100,7 @@ BODY RESPONSE
 	league: string
 }
 
-8. Retorma un equipo por su id con sus estadisticas
+8. Retorma un equipo por su nombre con sus jugadores
 GET /api/teams?teamName
 
 BODY RESPONSE
