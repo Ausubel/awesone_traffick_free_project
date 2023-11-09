@@ -1,13 +1,4 @@
-1. Retorna todos los jugadores con sus estadisticas
-GET /api/players?playerName
-BODY RESPONSE
-{
-	id:number
-	first_name: string;
-	last_name: string;
-	date_of_birth: Datetime;
-	market_value: number;
-}
+***************ALVARO***************
 
 2. Retorna un jugador por su id
 GET /api/players/{id}
@@ -74,102 +65,118 @@ PUT /api/player-contracts/register
 	release_clause;
 }
 
+***************AUSUBEL***************
 
-6. Retorna el contrato del jugador por su nombre
-GET /api/players-contracts?playerName
+1. Retorna todos los jugadores con sus estadisticas
+GET /api/players?playerName
 BODY RESPONSE
-{
-	id:number;
-	first_name: string;
-	last_name: string;
-	team_name: string;
-	start_date: Datetime;
-	end_date: Datetime;
-	salary: number
-}
+[
+	id:number
+	firstName: string;
+	lastName: string;
+	dateOfBirth: Datetime;
+	marketValue: number;
+]
+
 
 7. Retorna todos los equipos
 GET /api/teams
 
 BODY RESPONSE
 {
-	id: number;
-	team_name: string
-	budget: string
-	country: string;
-	league: string
+	"message": "SUCCESS",
+	"data":
+	[
+		{
+			teamName: string
+			budget: string
+			country: string;
+			league: string
+		}
+	] 
+	
 }
 
 8. Retorma un equipo por su nombre con sus jugadores
-GET /api/teams?teamName
+GET /api/teams/?name
 
 BODY RESPONSE
 {
-	id: number;
-	team_name: string
-	budget: string
-	country: string;
-	league: string
-	players: 
-		[
-		id: number;
-		first_name: string;
-		last_name: string;
-		player_position: string
+    "message": "SUCCESS",
+    "data": {
+        "id": number,
+        "teamName": string,
+        "budget": number,
+        "country": string,
+        "league": string,
+        "players": [
+            {
+                "firstName": string,
+                "lastName": string,
+                "dateOfBirth": Date,
+                "marketValue": number
+            },
 		]
+	}
 }
 
 9. Crea un equipo
-POST /api/teams
+POST /api/teams/new
 
 BODY RESQUEST
 {
 	team_name: string;
 	budget: number;
-	country_id: string;
-	league_id: string
+	countryId: number;
+	leagueId: number
 }
 
 BODY RESPONSE
 {
-	message: "Success"
+    "message": "SUCCESS",
+    "data": null
+}
+
+10. Obtener todas las tranferencias de un equipo
+GET /api/team/{id}
+
+BODY RESPONSE
+{
+    "message": "SUCCESS",
+    "data": [
+        {
+            "id": number,
+            "transfertDate": Date,
+            "transfertFee": number,
+            "contractDurationSeasons": number,
+            "realeaseClause": number,
+            "originalTeamId": number,
+            "newTeamId": number
+        },
+	]
 }
 
 
-10. Transferir jugadores a equipo
-POST /api/transfer/new-transfer/to-team/{id}
+
+
+11. Transferir jugador a equipo
+POST /api/transfer/new-transfer/player/{id}
 BODY RESQUEST
-[
-	player_id: number;
-	origin_team: number;
-	destination_team: number;
-	transfer_date: Datetime;
-	transfer_fee: number;
-	contract_duration_season: number;
-	realease_clause: number
-]
+{
+	originTeam: number;
+	destinationTeam: number;
+	transferDate: Datetime;
+	transferFee: number;
+	contractDurationSeason: number;
+	realeaseClause: number
+}
 
 BODY RESPONSE
 {
-	message: "Success"
+    "message": "SUCCESS",
+    "data": null
 }
 
-11. Obtener todas las tranferencias de un equipo
-GET /api/team/{id}/all-transfers
-
-BODY RESPONSE
-[
-	transfer_id: number;
-	origin_team: string;
-	players: [
-		first_name: string;
-		last_name: string;
-		market_value: number;
-		transfer_fee: number;
-		contract_duration_season: int;
-		realease_clause: number
-		];
-]
 
 12. Agregar un liga a un equipo existente ***
 
@@ -182,5 +189,6 @@ BODY RESQUEST
 
 BODY RESPONSE
 {
-	message: "Success"
+    "message": "SUCCESS",
+    "data": null
 }

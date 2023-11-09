@@ -2,7 +2,7 @@ type Player = {
     id?: number;
     firstName: string;
     lastName: string;
-    dateOfBirth: Date;
+    dateOfBirth?: Date;
     marketValue: number;
     currentContractId?: number;
     currentAgentId?: number;

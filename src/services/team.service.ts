@@ -1,3 +1,4 @@
+import TeamRegisterDTO from "../controllers/dtos/TeamRegisterDTO";
 import Team, { ExtendedTeam } from "../entities/Team";
 import TeamModel from "../models/team.model";
 
@@ -11,5 +12,10 @@ export default class TeamService {
 	}
 	async getTeamByName(name: string): Promise<ExtendedTeam> {
 		return await this.teamModel.getTeamByName(name);
+	}
+	async registerTeam(team: TeamRegisterDTO): Promise<string> {
+		const record = await this.teamModel.registerTeam(team);
+		const message = record["message"] as string;
+		return message;
 	}
 }

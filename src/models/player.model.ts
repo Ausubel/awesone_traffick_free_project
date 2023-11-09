@@ -2,7 +2,7 @@
 import StoredProcedures from "../db/StoredProcedures";
 import Player from "../entities/Player";
 import ModelBase from "./ModelBase";
-import playerMapper from "./mappers/player.mapper";
+import playerReducedMapper from "./mappers/playerReduced.mapper";
 
 
 export default class PlayerModel  extends ModelBase{
@@ -10,6 +10,6 @@ export default class PlayerModel  extends ModelBase{
 		const [[resultset]] = (await this.database.query(
 			StoredProcedures.GetAllPlayers
 		)) as [[any[]]];
-		return resultset.map(playerMapper);
+		return resultset.map(playerReducedMapper);
 	}
 }
