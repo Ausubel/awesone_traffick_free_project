@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS player (
   last_name VARCHAR(50) NULL DEFAULT NULL,
   date_of_birth DATE NULL DEFAULT NULL,
   market_value DECIMAL(12,2) NULL DEFAULT NULL,
-  current_agent_id INT NOT NULL,
-  career_statistics_id INT NOT NULL,
+  current_agent_id INT NULL,
+  career_statistics_id INT NULL,
   country_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (current_agent_id) REFERENCES agent_representative (id),
@@ -89,24 +89,28 @@ CREATE TABLE IF NOT EXISTS current_contract (
   FOREIGN KEY (player_id) REFERENCES player(id),
   FOREIGN KEY (position_id) REFERENCES player_position(id)
 );
-CREATE TABLE IF NOT EXISTS transfer (
+CREATE TABLE IF NOT EXISTS transfer_contract (
   id INT NOT NULL AUTO_INCREMENT,
-  transfer_date DATE NULL DEFAULT NULL,
+  transfer_date DATE NOT NULL,
+  transfer_fee DECIMAL(12,2) NOT NULL,
+  contract_duration_season TINYINT NOT NULL,
+  release_clause DECIMAL(10,2) NOT NULL,
   origin_team_id INT NULL,
   destination_team_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (origin_team_id) REFERENCES team (id),
   FOREIGN KEY (destination_team_id) REFERENCES team (id));
-CREATE TABLE IF NOT EXISTS transfer_contract (
+  
+CREATE TABLE IF NOT EXISTS transfer (
   id INT NOT NULL AUTO_INCREMENT,
-  transfer_fee DECIMAL(12,2) NULL DEFAULT NULL,
-  contract_duraction_season TINYINT NULL,
-  release_clause DECIMAL(10,2) NULL,
-  player_id INT NOT NULL,
-  transfer_id INT NOT NULL,
+  player_id INT NOT NULL,  
+  transfer_contract_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (player_id) REFERENCES player (id),
-  FOREIGN KEY (transfer_id) REFERENCES transfer (id));
+  FOREIGN KEY (transfer_contract_id) REFERENCES transfer_contract (id)
+);
+
+
 
 
 -- Insert data into the "country" table
@@ -150,19 +154,22 @@ INSERT INTO career_statistics (goals, assists, matches_played) VALUES
 INSERT INTO player (first_name, last_name, date_of_birth, market_value, current_agent_id, career_statistics_id, country_id) VALUES
   ('Cristiano', 'Ronaldo', '1985-02-05', 100000000, 1, 1, 1),
   ('Paul', 'Pogba', '1993-03-15', 80000000, 2, 2, 2),
-  ('Gianluigi', 'Buffon', '1978-01-28', 5000000, 3, 3, 3);
+  ('Gianluigi', 'Buffon', '1978-01-28', 5000000, 3, 3, 3),
+  ('AntiCristiano', 'Ronaldo', '1985-02-05', 100000000, 1, 1, 1);
   
 -- Insert data into the "contract" table first
 INSERT INTO contract (start_date, end_date, salary, release_clause, team_id) VALUES
   ('2022-01-01', '2023-01-01', 5000000, 7500000, 1),
   ('2022-02-01', '2023-02-01', 4000000, 6000000, 2),
-  ('2022-03-01', '2023-03-01', 1000000, 2000000, 3);
+  ('2022-03-01', '2023-03-01', 1000000, 2000000, 3),
+  ('2022-03-01', '2023-03-01', 1000000, 2000000, 1);
 
 -- Insert data into the "current_contract" table
 INSERT INTO current_contract (player_id, contract_id) VALUES
   (1, 1),
   (2, 2),
-  (3, 3);
+  (3, 3),
+  (4, 4);
 
 -- Insert data into the "player_position_assignment" table
 INSERT INTO player_position_assignment (player_id, position_id) VALUES
@@ -170,17 +177,20 @@ INSERT INTO player_position_assignment (player_id, position_id) VALUES
   (2, 2),
   (3, 4);
 
--- Insert data into the "transfer" table
-INSERT INTO transfer (transfer_date, origin_team_id, destination_team_id) VALUES
-  ('2023-01-15', 1, 2),
-  ('2023-02-20', 2, 3),
-  ('2023-03-10', 3, 1);
 
 -- Insert data into the "transfer_contract" table
-INSERT INTO transfer_contract (transfer_fee, contract_duraction_season, release_clause, player_id, transfer_id) VALUES
-  (50000000, 3, 75000000, 1, 1),
-  (60000000, 4, 90000000, 2, 2),
-  (3000000, 2, 5000000, 3, 3);
+INSERT INTO transfer_contract (transfer_date, transfer_fee, contract_duration_season, release_clause, origin_team_id, destination_team_id) VALUES
+  ('2022-01-01', 5000000, 1, 7500000, 1, 2),
+  ('2022-02-01', 4000000, 2, 6000000, 2, 3),
+  ('2022-03-01', 1000000, 3, 2000000, 3, 1);
+  
+  -- Insert data into the "transfer" table
+INSERT INTO transfer (player_id, transfer_contract_id) VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3);
+
+
 
 /* Stored Procedures */
 DROP PROCEDURE IF EXISTS get_all_players;
@@ -189,3 +199,105 @@ CREATE PROCEDURE get_all_players()
 BEGIN
     SELECT * FROM player;
 END //
+
+DROP PROCEDURE IF EXISTS get_all_teams;
+DELIMITER //
+CREATE PROCEDURE get_all_teams()
+BEGIN
+    SELECT 
+      team.id,
+      team_name,
+      budget,
+      country.name as country,
+      league.league_name as league
+    FROM team INNER JOIN country ON team.country_id = country.id
+    INNER JOIN league ON team.league_id = league.id;
+END //
+
+DROP PROCEDURE IF EXISTS get_team_by_name;
+DELIMITER //
+CREATE PROCEDURE get_team_by_name(
+  IN _team_name VARCHAR(50)
+)
+BEGIN
+    SELECT
+      team.id,
+      team_name,
+      budget,
+      country.name as country,
+      l1.league_name as league,
+      first_name,
+      last_name,
+      date_of_birth,
+      market_value
+    FROM team INNER JOIN contract ON team.id = contract.team_id
+    INNER JOIN country ON team.country_id = country.id
+    INNER JOIN league l1 ON team.league_id = l1.id
+    INNER JOIN current_contract ON contract.id = current_contract.contract_id
+    INNER JOIN player ON current_contract.player_id = player.id
+    INNER JOIN league l2 ON team.league_id = l2.id
+    WHERE team_name = _team_name;
+END//
+
+DROP PROCEDURE IF EXISTS register_team;
+DELIMITER //
+CREATE PROCEDURE register_team(
+    IN _team_name VARCHAR(50),
+    IN _budget DECIMAL(10,2),
+    IN _country_id INT,
+    IN _league_id INT
+)
+BEGIN
+    IF (NOT EXISTS (SELECT 0 FROM country WHERE id = _country_id)) THEN
+        SELECT "Country not found" as "message";
+    END IF;
+    IF (NOT EXISTS (SELECT 0 FROM league WHERE id = _league_id)) THEN
+        SELECT "League not found" as "message";
+    END IF;
+    INSERT INTO team (team_name, budget, country_id, league_id) VALUES
+    (_team_name, _budget, _country_id, _league_id);
+    SELECT "SUCCESS" as "message";
+END //
+
+DROP PROCEDURE IF EXISTS get_all_transfers_by_team_id;
+DELIMITER //
+CREATE PROCEDURE get_all_transfers_by_team_id(
+  IN _team_id INT
+  )
+BEGIN
+    SELECT * FROM transfer_contract
+    WHERE origin_team_id = _team_id OR destination_team_id = _team_id;
+END //
+
+
+
+
+DROP PROCEDURE IF EXISTS new_transfer;
+DELIMITER //
+CREATE PROCEDURE new_transfer(
+    IN _player_id INT,
+    IN _destination_team_id INT,
+    IN _transfer_date DATE,
+    IN _transfer_fee DECIMAL(10,2),
+    IN _contract_duration_season INT,
+    IN _release_clause DECIMAL(10,2)
+)
+BEGIN
+    IF (NOT EXISTS (SELECT 0 FROM player WHERE id = _player_id)) THEN
+        SELECT "Player not found" as "message";
+    END IF;
+    IF (NOT EXISTS (SELECT 0 FROM team WHERE id = _origin_team_id)) THEN
+        SELECT "Origin team not found" as "message";
+    END IF;
+    IF (NOT EXISTS (SELECT 0 FROM team WHERE id = _destination_team_id)) THEN
+        SELECT "Destination team not found" as "message";
+    END IF;
+    
+    INSERT INTO transfer (transfer_date, origin_team_id, destination_team_id) VALUES
+    (_transfer_date, (SELECT id FROM team WHERE id = _origin_team_id), _destination_team_id);
+    INSERT INTO transfer_contract (transfer_fee, contract_duration_season, release_clause, player_id, transfer_id) VALUES
+    (_transfer_fee, _contract_duration_season, _release_clause, _player_id, LAST_INSERT_ID());
+    SELECT "SUCCESS" as "message";
+END //
+
+

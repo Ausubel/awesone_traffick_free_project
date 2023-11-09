@@ -1,5 +1,7 @@
 import { Application } from "express";
 import PlayerController from "./player.controller";
+import TeamComtroller from "./team.controller";
+import TransferController from "./transfer.controller";
 import ControllerBase from "./ControllerBase";
 
 export default class ControllerInitializer {
@@ -8,7 +10,9 @@ export default class ControllerInitializer {
 	constructor(app: Application) {
 		this.app = app;
 		this.controllers = [
-			new PlayerController()
+			new PlayerController(),
+			new TeamComtroller(),
+			new TransferController(),
 		];
 	}
 	init() {
