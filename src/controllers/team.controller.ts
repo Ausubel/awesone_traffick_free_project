@@ -27,16 +27,9 @@ export default class TeamController implements ControllerBase {
 	}
 	private onGetTeams() {
 		this.router.get("/", async (req, res) => {
-			if (req.query.name) {
-				const name: string = req.query.name as string;
-				const foundTeam: ExtendedTeam = 
-					await this.teamService.getTeamByName(name);
-				res.json(ApiResponse.complete<ExtendedTeam>("SUCCESS",foundTeam));	
-			}else{
-				const teams: Team[] =
-				await this.teamService.getTeams()
-				res.json(ApiResponse.complete<Team[]>("SUCCESS",teams));
-			}
+			const teams: Team[] =
+			await this.teamService.getTeams()
+			res.json(ApiResponse.complete<Team[]>("SUCCESS",teams));
 			
 		});
 	}

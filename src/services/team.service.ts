@@ -10,9 +10,6 @@ export default class TeamService {
 	async getTeams(): Promise<Team[]> {
 		return await this.teamModel.getTeams();
 	}
-	async getTeamByName(name: string): Promise<ExtendedTeam> {
-		return await this.teamModel.getTeamByName(name);
-	}
 	async registerTeam(team: TeamRegisterDTO): Promise<string> {
 		const record = await this.teamModel.registerTeam(team);
 		const message = record["message"] as string;

@@ -68,7 +68,7 @@ PUT /api/player-contracts/register
 ***************AUSUBEL***************
 
 1. Retorna todos los jugadores con sus estadisticas
-GET /api/players?playerName
+GET /api/players
 BODY RESPONSE
 [
 	id:number

@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS player (
 
 CREATE TABLE IF NOT EXISTS current_contract (
   id INT NOT NULL AUTO_INCREMENT,
-  player_id INT NOT NULL,
+  player_id INT NOT NULL UNIQUE,
   contract_id INT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (contract_id) REFERENCES contract (id),
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS transfer_contract (
   
 CREATE TABLE IF NOT EXISTS transfer (
   id INT NOT NULL AUTO_INCREMENT,
-  player_id INT NOT NULL,  
+  player_id INT NOT NULL UNIQUE,
   transfer_contract_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (player_id) REFERENCES player (id),
@@ -267,37 +267,6 @@ CREATE PROCEDURE get_all_transfers_by_team_id(
 BEGIN
     SELECT * FROM transfer_contract
     WHERE origin_team_id = _team_id OR destination_team_id = _team_id;
-END //
-
-
-
-
-DROP PROCEDURE IF EXISTS new_transfer;
-DELIMITER //
-CREATE PROCEDURE new_transfer(
-    IN _player_id INT,
-    IN _destination_team_id INT,
-    IN _transfer_date DATE,
-    IN _transfer_fee DECIMAL(10,2),
-    IN _contract_duration_season INT,
-    IN _release_clause DECIMAL(10,2)
-)
-BEGIN
-    IF (NOT EXISTS (SELECT 0 FROM player WHERE id = _player_id)) THEN
-        SELECT "Player not found" as "message";
-    END IF;
-    IF (NOT EXISTS (SELECT 0 FROM team WHERE id = _origin_team_id)) THEN
-        SELECT "Origin team not found" as "message";
-    END IF;
-    IF (NOT EXISTS (SELECT 0 FROM team WHERE id = _destination_team_id)) THEN
-        SELECT "Destination team not found" as "message";
-    END IF;
-    
-    INSERT INTO transfer (transfer_date, origin_team_id, destination_team_id) VALUES
-    (_transfer_date, (SELECT id FROM team WHERE id = _origin_team_id), _destination_team_id);
-    INSERT INTO transfer_contract (transfer_fee, contract_duration_season, release_clause, player_id, transfer_id) VALUES
-    (_transfer_fee, _contract_duration_season, _release_clause, _player_id, LAST_INSERT_ID());
-    SELECT "SUCCESS" as "message";
 END //
 
 
