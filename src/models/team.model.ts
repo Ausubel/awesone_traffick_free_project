@@ -23,7 +23,6 @@ export default class TeamModel extends ModelBase{
 				team.leagueId
 			]
 		);
-		console.log(record);
 		return record;
 	}
 }

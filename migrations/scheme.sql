@@ -200,6 +200,54 @@ BEGIN
     SELECT * FROM player;
 END //
 
+
+
+DROP PROCEDURE IF EXISTS get_player_by_name;
+DELIMITER //
+CREATE PROCEDURE get_player_by_name(
+  IN _first_name VARCHAR(50)  
+)
+BEGIN
+    SELECT
+      player.id,
+      first_name,
+      last_name,
+      date_of_birth,
+      market_value,
+      agent_representative.agent_name,
+      country.name as country,
+      career_statistics.goals,
+      career_statistics.assists,
+      career_statistics.matches_played
+    FROM player 
+    INNER JOIN career_statistics ON player.career_statistics_id = career_statistics.id
+    INNER JOIN agent_representative ON player.current_agent_id = agent_representative.id
+    INNER JOIN country ON player.country_id = country.id
+    WHERE LOWER(first_name) LIKE CONCAT('%', lower(_first_name) , '%');
+END //
+
+DROP PROCEDURE IF EXISTS get_players_by_team;
+DELIMITER //
+CREATE PROCEDURE get_players_by_team(
+  IN _team_name VARCHAR(100)
+)
+BEGIN
+    SELECT
+      first_name,
+      last_name,
+      date_of_birth,
+      market_value
+    FROM player 
+    INNER JOIN country ON player.country_id = country.id
+    INNER JOIN current_contract ON current_contract.player_id = player.id
+    INNER JOIN contract ON contract.id = current_contract.contract_id
+    INNER JOIN team ON team.id = contract.team_id
+    WHERE team.team_name = _team_name;
+END //
+DELIMITER ;
+
+
+
 DROP PROCEDURE IF EXISTS get_all_teams;
 DELIMITER //
 CREATE PROCEDURE get_all_teams()
@@ -238,6 +286,28 @@ BEGIN
     INNER JOIN league l2 ON team.league_id = l2.id
     WHERE team_name = _team_name;
 END//
+
+DROP PROCEDURE IF EXISTS register_player;
+DELIMITER //
+CREATE PROCEDURE register_player(
+    IN _first_name VARCHAR(50),
+    IN _last_name VARCHAR(50),
+    IN _date_of_birth DATE,
+    IN _market_value DECIMAL(10,2),
+    IN _country_id INT
+)
+BEGIN
+    IF (NOT EXISTS (SELECT 0 FROM country WHERE id = _country_id)) THEN
+        SELECT "Country not found" as "message";
+    END IF;
+    IF (EXISTS (SELECT 0 FROM player WHERE first_name = _first_name AND last_name = _last_name)) THEN
+        SELECT "Player already exists" as "message";
+    END IF;
+    INSERT INTO player (first_name, last_name, date_of_birth, market_value, country_id) VALUES
+    (_first_name, _last_name, _date_of_birth, _market_value, _country_id);
+    SELECT "SUCCESS" as "message";
+END //
+
 
 DROP PROCEDURE IF EXISTS register_team;
 DELIMITER //

@@ -1,3 +1,4 @@
+import PlayerRegisterDTO from "../controllers/dtos/PlayerRegisterDTO";
 import Player from "../entities/Player";
 import PlayerModel from "../models/player.model";
 
@@ -8,5 +9,16 @@ export default class PlayerService {
 	}
 	async getPlayers(): Promise<Player[]> {
 		return await this.playerModel.getPlayers();
+	}
+	async getPlayerByNameId(name: string): Promise<Player[]> {
+		return await this.playerModel.getPlayerByNameId(name);
+	}
+	async getPlayersByTeamName(teamName: string): Promise<Player[]> {
+		return await this.playerModel.getPlayersByTeamName(teamName);
+	}
+	async registerPlayer(player: PlayerRegisterDTO): Promise<any> {
+		const record = await this.playerModel.registerPlayer(player);
+		const message = record["message"] as string;
+		return message;
 	}
 }

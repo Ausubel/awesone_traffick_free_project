@@ -34,10 +34,10 @@ export default class TeamController implements ControllerBase {
 		});
 	}
 	private onRegisterTeam() {
-		this.router.post("/new", async (req, res) => {
+		this.router.post("/register", async (req, res) => {
 			const body = req.body;
 			if (!TeamRegisterDTO.isValid(body)) {
-				res.status(500).json(ApiResponse.empty());
+				res.status(400).json(ApiResponse.empty());
 				return;
 			}
 			const teamRegisterDTO: TeamRegisterDTO = 

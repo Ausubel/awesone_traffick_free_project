@@ -1,6 +1,6 @@
 # ENDPOINTS - TRANSFERMARKET
 
-##  Retorna todos los jugadores
+##  Retorna todos los jugadores 1
 ### __GET__ */api/players*
 #### BODY RESPONSE
 ```json
@@ -17,36 +17,87 @@
     ]	
 }
 ```
-##  Retorna todos los jugadores por su id
-### __GET__ */api/players/{id}*
+##  Registra a un jugador
+### __GET__ */api/players*
 #### BODY RESPONSE
 ```json
 {
 	"message": "SUCCESS",
-	"data": {
-        "firstName": "Cristiano",
-        "lastName": "Ronaldo",
-        "dateOfBirth": "1985-02-05T05:00:00.000Z",
-        "marketValue": "100000000.00"
-    }
+	"data": [
+        {
+            "id": 1,
+            "firstName": "Cristiano",
+            "lastName": "Ronaldo",
+            "dateOfBirth": "1985-02-05T05:00:00.000Z",
+            "marketValue": "100000000.00"
+        },
+    ]	
 }
 ```
-##  Retorna todos los jugadores por su equipo
-### __GET__ */api/players/team*
+##  Retorna todos los jugadores por su nombre
+### __GET__ */api/players/?name* 1 
+#### BODY RESPONSE
+```json
+{
+    "message": "SUCCESS",
+    "data": [
+        {
+            "id": 1,
+            "firstName": "Cristiano",
+            "lastName": "Ronaldo",
+            "dateOfBirth": "1985-02-05T05:00:00.000Z",
+            "marketValue": "100000000.00",
+            "currentAgent": "Agent 1",
+            "country": "Spain",
+            "careerStatistics": {
+                "goals": 10,
+                "assists": 5,
+                "matches": 20
+            }
+        },
+        {
+            "id": 4,
+            "firstName": "AntiCristiano",
+            "lastName": "Ronaldo",
+            "dateOfBirth": "1985-02-05T05:00:00.000Z",
+            "marketValue": "100000000.00",
+            "currentAgent": "Agent 1",
+            "country": "Spain",
+            "careerStatistics": {
+                "goals": 10,
+                "assists": 5,
+                "matches": 20
+            }
+        }
+    ]
+}
+```
+## Retorna todos los jugadores por su equipo
+### __GET__ */api/players/team/{name}* 1
 #### BODY RESPONSE
 ```json
 {
 	"message": "SUCCESS",
-	"data": {
-        "firstName": "Cristiano",
-        "lastName": "Ronaldo",
-        "dateOfBirth": "1985-02-05T05:00:00.000Z",
-        "marketValue": "100000000.00"
-    }
+	"data": [
+        {
+            "id": 1,
+            "firstName": "Cristiano",
+            "lastName": "Ronaldo",
+            "dateOfBirth": "1985-02-05T05:00:00.000Z",
+            "marketValue": "100000000.00"
+        },
+        {
+            "id": 2,
+            "firstName": "Lionel",
+            "lastName": "Messi",
+            "dateOfBirth": "1987-06-24T05:00:00.000Z",
+            "marketValue": "120000000.00"
+        },
+    ]	
 }
 ```
 ##  Retorna todos los equipos
-### __GET__ */api/teams*
+### __GET__ */api/teams* 1
 #### BODY RESPONSE
 ```json
 {
@@ -61,37 +112,8 @@
     ]
 }
 ```
-##  Retorma un equipo por su nombre con sus jugadores
-### __GET__ */api/teams/?name*
-#### BODY RESPONSE
-```json
-{
-    "message": "SUCCESS",
-    "data": {
-        "id": 1,
-        "teamName": "Real Madrid",
-        "budget": "50000000.00",
-        "country": "Spain",
-        "league": "La Liga",
-        "players": [
-            {
-                "firstName": "Cristiano",
-                "lastName": "Ronaldo",
-                "dateOfBirth": "1985-02-05T05:00:00.000Z",
-                "marketValue": "100000000.00"
-            },
-            {
-                "firstName": "AntiCristiano",
-                "lastName": "Ronaldo",
-                "dateOfBirth": "1985-02-05T05:00:00.000Z",
-                "marketValue": "100000000.00"
-            }
-        ]
-    }
-}
-```
 ##  Crea un equipo
-### __GET__ */api/teams/create*
+### __GET__ */api/teams/register* 1
 #### BODY REQUEST
 ```json
 {
@@ -110,7 +132,7 @@
 
 ```
 ##  Obtener las transferencias de un equipo por su id
-### __GET__ *api/transfer/{id}*
+### __GET__ *api/transfer/{id}* 1
 #### BODY RESPONSE
 ```json
 {
