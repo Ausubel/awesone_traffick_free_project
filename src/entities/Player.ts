@@ -1,4 +1,4 @@
-import CarrierStatistics from "./CarrerStatistics";
+import CarrierStatistics from "./CarreerStatistics";
 
 type Player = {
     id?: number;

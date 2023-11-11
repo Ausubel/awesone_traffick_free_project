@@ -4,6 +4,8 @@ import Player from "../entities/Player";
 import ControllerBase from "./ControllerBase";
 import ApiResponse from "../utils/http";
 import PlayerRegisterDTO from "./dtos/PlayerRegisterDTO";
+import PlayerUpdateCarreerStatistiscDTO from "./dtos/PlayerUpdateCarreerStatistiscDTO";
+
 
 export default class PlayerController implements ControllerBase {
 	private _root: string;
@@ -26,6 +28,7 @@ export default class PlayerController implements ControllerBase {
 		this.onGetPlayerByNameId()
 		this.onGetPlayersByTeamName()
 		this.onRegisterPlayer()
+		this.onUpdateCarreerStatsByPlayerId()
 	}
 	private onGetPlayers() {
 		this.router.get("/", async (_, res) => {
@@ -60,5 +63,23 @@ export default class PlayerController implements ControllerBase {
 			if (message !== "SUCCESS") res.status(400).json(ApiResponse.empty());
 			res.json(ApiResponse.complete<null>(message, null));
 		});
+	}
+	private onUpdateCarreerStatsByPlayerId() {
+		this.router.put("/:id/update-stats", async (req, res) => {
+			const playerId: number = parseInt(req.params.id);
+			const body = req.body;
+			if (!PlayerUpdateCarreerStatistiscDTO.isValid(body)) {
+				res.status(400).json(ApiResponse.empty());
+				return;
+			}
+			const playerUpdateCarreerStatistisc: PlayerUpdateCarreerStatistiscDTO = new PlayerUpdateCarreerStatistiscDTO(body);
+			const message: string = await this.playerService.updateCarreerStatsByPlayerId(playerId, playerUpdateCarreerStatistisc);
+			console.log(message);
+			if (message !== "SUCCESS") {res.status(400).json(ApiResponse.empty());
+				return;}
+			console.log(message);
+			res.json(ApiResponse.complete<null>(message, null));
+			
+		})
 	}
 }

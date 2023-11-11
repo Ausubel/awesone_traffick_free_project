@@ -340,3 +340,26 @@ BEGIN
 END //
 
 
+DROP PROCEDURE IF EXISTS update_player_contract;
+DELIMITER //
+
+CREATE PROCEDURE update_player_contract(
+  IN _player_id INT,
+  IN _start_date DATE,
+  IN _end_date DATE,
+  IN _salary DECIMAL(10, 2),
+  IN _release_clause DECIMAL(10, 2),
+  IN _team_id INT
+)
+BEGIN
+  DECLARE new_contract_id INT;
+
+  INSERT INTO contract (start_date, end_date, salary, release_clause, team_id)
+  VALUES (_start_date, _end_date, _salary, _release_clause, _team_id);
+
+  SET new_contract_id = LAST_INSERT_ID();
+
+  UPDATE current_contract SET contract_id = new_contract_id
+  WHERE player_id = _player_id;
+  SELECT "SUCCESS" as "message";
+END //
