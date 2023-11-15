@@ -26,7 +26,7 @@ export default class TeamController implements ControllerBase {
 		this.onRegisterTeam()
 	}
 	private onGetTeams() {
-		this.router.get("/", async (req, res) => {
+		this.router.get("/", async (_, res) => {
 			const teams: Team[] =
 			await this.teamService.getTeams()
 			res.json(ApiResponse.complete<Team[]>("SUCCESS",teams));

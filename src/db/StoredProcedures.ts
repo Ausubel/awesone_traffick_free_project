@@ -8,7 +8,10 @@ export enum StoredProcedures {
     GetAllTransfersByTeamId = "CALL get_all_transfers_by_team_id(?)",
     UpdateCarreerStatsByPlayerId = "CALL update_carreer_stats_by_player_id(?, ?, ?, ?)",
     GetAllContractsByPlayerId = "CALL get_all_contracts_by_player_id(?)",
-    RegisterPlayerContract = "CALL update_player_contract(?, ?, ?, ?, ?, ?)"
+    RegisterPlayerContract = "CALL update_player_contract(?, ?, ?, ?, ?, ?)",
+    GetPasswordByUserName = "CALL get_password_by_username(?)",
+    GetUserDataById = "CALL get_user_data(?)",
+    RegisterUserGuest = "CALL register_user_guest(?, ?, ?, ?)",
 }
 
 export default StoredProcedures;

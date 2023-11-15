@@ -26,7 +26,6 @@ export default class PlayerContractsModel extends ModelBase{
                 playerContract.teamId
             ]
         );
-        console.log(record.message)
         return record;
     }
 };

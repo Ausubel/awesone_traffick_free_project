@@ -111,8 +111,6 @@ CREATE TABLE IF NOT EXISTS transfer (
 );
 
 
-
-
 -- Insert data into the "country" table
 INSERT INTO country (name, gentilic) VALUES
   ('Spain', 'Spanish'),

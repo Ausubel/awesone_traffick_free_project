@@ -18,7 +18,7 @@
 }
 ```
 ## 2. Registra a un jugador
-### __POST__ */api/players* 1
+### __POST__ */api/players/register* 1
 #### BODY RESPONSE
 ```json
 {
@@ -240,3 +240,5 @@
     "data": null
 }
 ```
+
+

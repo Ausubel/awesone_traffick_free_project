@@ -4,6 +4,7 @@ import TeamComtroller from "./team.controller";
 import TransferController from "./transfer.controller";
 import ControllerBase from "./ControllerBase";
 import PlayerContractController from "./player_contracs.controller";
+import AuthController from "./auth.controler";
 
 export default class ControllerInitializer {
 	private app: Application;
@@ -15,6 +16,7 @@ export default class ControllerInitializer {
 			new TeamComtroller(),
 			new TransferController(),
 			new PlayerContractController(),
+			new AuthController(),
 		];
 	}
 	init() {

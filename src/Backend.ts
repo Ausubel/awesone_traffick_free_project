@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import ControllerInitializer from "./controllers";
+import Encripter from "./utils/encripter";
+import Tokenizer from "./utils/tokenizer";
 
 export default class Backend {
 	private app: Application;
@@ -9,6 +11,8 @@ export default class Backend {
 	}
 	setup() {
 		this.setupDotenv();
+		Encripter.init();
+		Tokenizer.init();
 		this.setupRequestWithJson();
 		this.setupControllers();
 	}

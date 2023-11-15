@@ -6,4 +6,7 @@ export default class ApiResponse<D> {
 	static empty(): ApiResponse<null> {
 		return new ApiResponse("Empty", null);
 	}
+	static error(message: string): ApiResponse<null> {
+		return new ApiResponse(message, null);
+	}
 }
