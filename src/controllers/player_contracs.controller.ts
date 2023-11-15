@@ -4,6 +4,7 @@ import ControllerBase from "./ControllerBase";
 import ApiResponse from "../utils/http";
 import PlayerContract from "../entities/Contract";
 import ContractRegisterDTO from "./dtos/ContractRegisterDTO";
+import { sendResponses } from "../utils/sendResponses";
 
 export default class PlayerContractController implements ControllerBase{
     private _root: string;
@@ -29,7 +30,7 @@ export default class PlayerContractController implements ControllerBase{
         this._router.get("/:id", async (_, res) => {
             const id: number = parseInt(_.params.id);
             const contracts = await this.playerContractService.getAllContractsByPlayerId(id);
-            res.json(ApiResponse.complete<PlayerContract[]>("SUCCESS", contracts));
+            sendResponses(res, 200, "SUCCESS", contracts);
         });
     }
     private onRegisterPlayerContract() {
@@ -37,14 +38,14 @@ export default class PlayerContractController implements ControllerBase{
             const playerId: number = parseInt(req.params.id);
             const body = req.body;
             if (!ContractRegisterDTO.isValid(body)) {
-                res.status(400).json(ApiResponse.empty());
+                sendResponses(res, 400, "Invalid body", null);
                 return;
             }
             const playerContract: ContractRegisterDTO = new ContractRegisterDTO(body);
             const message: string = await this.playerContractService.registerPlayerContract(playerId,playerContract);
             console.log(message);
             if (message !== "SUCCESS") {
-                res.status(400).json(ApiResponse.empty());
+                sendResponses(res, 400, message, null);
                 console.log(message);
                 return;
             }

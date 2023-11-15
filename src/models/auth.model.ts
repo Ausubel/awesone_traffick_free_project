@@ -1,6 +1,5 @@
 import StoredProcedures from "../db/StoredProcedures";
 import ModelBase from "./ModelBase";
-import UserDTO from "../controllers/dtos/UserDTO";
 import userMapper from "./mappers/user.mapper";
 
 export default class AuthModel  extends ModelBase{
@@ -18,11 +17,5 @@ export default class AuthModel  extends ModelBase{
         )) as [[any[]]];
         return resultset.map(userMapper);
     }
-    async registerUserGuest(user: UserDTO): Promise<any> {
-        const [[[resultset]]] = await this.database.query(
-            StoredProcedures.RegisterUserGuest,
-            [user.name, user.lastName, user.userName, user.password]
-        );
-        return resultset;
-    }
+
 }

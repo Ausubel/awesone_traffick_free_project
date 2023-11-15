@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, json } from "express";
 import ControllerBase from "./ControllerBase";
 import ApiResponse from "../utils/http";
 import AuthService from  "../services/auth.service";
@@ -7,6 +7,7 @@ import UserDTO from "./dtos/UserDTO"
 import { checkAuthToken } from "../utils/checkAuthToken";
 import { USER_ROLE_IDS } from "../config/constants";
 import Tokenizer from "../utils/tokenizer";
+import { sendResponses } from "../utils/sendResponses";
 
 
 export default class AuthController implements ControllerBase {
@@ -27,7 +28,6 @@ export default class AuthController implements ControllerBase {
 	}
 	private onEndpoints() {
         this.onSignIn()
-        this.onRegisterUserGuest()
 	}
     private onSignIn(){
         this.router.get("/sing-in", async (req, res) => {
@@ -35,13 +35,12 @@ export default class AuthController implements ControllerBase {
             const password: string = req.body.password as string;
             const partialUser = await this.authService.getPasswordByUserName(username);
             if (!partialUser.password){
-                res.status(400).json(ApiResponse.empty());
-                console.log(partialUser);
+                sendResponses(res, 400, "User not found");
                 return;
             }
             const isCorrect = await Encrypter.compare(password, partialUser.password);
             if (!isCorrect){
-                res.status(400).json(ApiResponse.empty());
+                sendResponses(res, 400, "Wrong password");
                 return;
             }
             const user = await this.authService.getUserDataById(partialUser.id);
@@ -49,33 +48,12 @@ export default class AuthController implements ControllerBase {
             const token = await Tokenizer.create({
                 userRoleId: user[0]["roleId"]
             });
-            console.log(user[0].roleId)
-            res.json(ApiResponse.complete("SUCCESS", {
+            const data = {
                 user,
                 token
-            }));
+            }
+            sendResponses(res, 200, "Success", data);
         })
     }
-    private onRegisterUserGuest() {
-        this.router.post("/register-guest", checkAuthToken(USER_ROLE_IDS.ADMIN), async (req, res) => {
-            const guest = {
-                ...req.body,
-                password: await Encrypter.encrypt(req.body.password)
-            };
-    
-            if (!UserDTO.isValid(guest)) {
-                return res.status(400).json(ApiResponse.empty());
-            }
-    
-            const user: UserDTO = new UserDTO(guest);
-            const message: string = await this.authService.registerUserGuest(user);
-    
-            if (message !== "SUCCESS") {
-                return res.status(400).json(ApiResponse.error(message));
-            }
-    
-            return res.json(ApiResponse.complete<null>(message, null));
-        });
-    }    
 }
 

@@ -4,6 +4,7 @@ import ControllerBase from "./ControllerBase";
 import ApiResponse from "../utils/http";
 
 import Transfer from "../entities/Transfer";
+import { sendResponses } from "../utils/sendResponses";
 
 export default class TeamController implements ControllerBase {
 	private _root: string;
@@ -29,9 +30,11 @@ export default class TeamController implements ControllerBase {
 			const transferId: number = parseInt(req.params.id);
 			const transfers: Transfer[] =
 				await this.transferService.getAllTransfersByTeamId(transferId);
-			// console.log(transfers)
-			if (!transfers) res.status(400).json(ApiResponse.empty());
-			res.json(ApiResponse.complete<Transfer[]>("SUCCESS", transfers));
+			if (!transfers){
+				sendResponses(res, 404, "Not Found", null);
+				return;
+			}
+			sendResponses(res, 200, "SUCCESS", transfers);
 		})
 	}
 }

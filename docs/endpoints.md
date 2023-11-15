@@ -5,7 +5,7 @@
 #### BODY RESPONSE
 ```json
 {
-	"message": "SUCCESS",
+	"message": "Success",
 	"data": [
         {
             "id": 1,
@@ -32,7 +32,7 @@
 #### BODY RESPONSE
 ```json
 {
-	"message": "SUCCESS",
+	"message": "Success",
 	"data": null
 }
 ```
@@ -41,7 +41,7 @@
 #### BODY RESPONSE
 ```json
 {
-    "message": "SUCCESS",
+    "message": "Success",
     "data": [
         {
             "id": 1,
@@ -79,7 +79,7 @@
 #### BODY RESPONSE
 ```json
 {
-	"message": "SUCCESS",
+	"message": "Success",
 	"data": [
         {
             "id": 1,
@@ -113,7 +113,7 @@
 #### BODY RESPONSE
 ```json
 {
-	"message": "SUCCESS",
+	"message": "Success",
 	"data": [
         {
             "id": 1,
@@ -137,7 +137,7 @@
 #### BODY RESPONSE
 ```json
 {
-    "message": "SUCCESS",
+    "message": "Success",
     "data": [
         {
             "teamName": "Real Madrid",
@@ -162,7 +162,7 @@
 #### BODY RESPONSE
 ```json
 {
-    "message": "SUCCESS",
+    "message": "Success",
     "data": null
 }
 
@@ -172,7 +172,7 @@
 #### BODY RESPONSE
 ```json
 {
-    "message": "SUCCESS",
+    "message": "Success",
     "data": [
         {
             "id": 1,
@@ -199,7 +199,7 @@
 #### BODY RESPONSE
 ```json
 {
-    "message": "SUCCESS",
+    "message": "Success",
     "data": [
         {
             "id": 1,
@@ -236,7 +236,66 @@
 #### BODY RESPONSE
 ```json
 {
-    "message": "SUCCESS",
+    "message": "Success",
+    "data": null
+}
+```
+### __GET__ *api/auth/sing-in*
+#### BODY REQUEST
+```json
+{
+    "username": "admin",
+    "password": "admin"
+}
+```
+#### BODY RESPONSE
+```json
+{
+    "message": "Success",
+    "data": {
+        "user": [
+            {
+                "name": "admin",
+                "lastName": "admin",
+                "userName": "admin",
+                "roleId": 1
+            }
+        ],
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyUm9sZUlkIjoxLCJpYXQiOjE3MDAwNjUxMDAsImV4cCI6MTcwMDIzNzkwMH0.Ffw0-iQqQ9LtW1Q2dTrWX7CZqWHEby-sO9sS7Q5dZBk"
+    }
+}
+```
+### __POST__ */register/guest*
+#### BODY REQUEST
+```json
+{
+    "name": "Ausubel",
+    "lastName": "Velasquez",
+    "userName": "ausubelvc",
+    "password": "intelectus135"
+}
+```
+#### BODY RESPONSE
+```json
+{
+    "message": "Created",
+    "data": null
+}
+```
+### __POST__ */register/agent*
+#### BODY REQUEST
+```json
+{
+    "name": "Cristina",
+    "lastName": "Ronalda",
+    "userName": "chist",
+    "password": "007"
+}
+```
+#### BODY RESPONSE
+```json
+{
+    "message": "Created",
     "data": null
 }
 ```

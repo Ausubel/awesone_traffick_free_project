@@ -361,3 +361,5 @@ BEGIN
   WHERE player_id = _player_id;
   SELECT "SUCCESS" as "message";
 END //
+
+call update_player_contract(1, '2022-01-01', '2022-02-01', 1000000, 2000000, 1);

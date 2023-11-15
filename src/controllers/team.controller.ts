@@ -4,6 +4,9 @@ import Team, { ExtendedTeam } from "../entities/Team";
 import ControllerBase from "./ControllerBase";
 import ApiResponse from "../utils/http";
 import TeamRegisterDTO from "./dtos/TeamRegisterDTO";
+import { sendResponses } from "../utils/sendResponses";
+import { USER_ROLE_IDS } from "../config/constants";
+import { checkAuthToken } from "../utils/checkAuthToken";
 
 export default class TeamController implements ControllerBase {
 	private _root: string;
@@ -29,15 +32,15 @@ export default class TeamController implements ControllerBase {
 		this.router.get("/", async (_, res) => {
 			const teams: Team[] =
 			await this.teamService.getTeams()
-			res.json(ApiResponse.complete<Team[]>("SUCCESS",teams));
+			sendResponses(res, 200, null, teams);
 			
 		});
 	}
 	private onRegisterTeam() {
-		this.router.post("/register", async (req, res) => {
+		this.router.post("/register",checkAuthToken(USER_ROLE_IDS.AGENT), async (req, res) => {
 			const body = req.body;
 			if (!TeamRegisterDTO.isValid(body)) {
-				res.status(400).json(ApiResponse.empty());
+				sendResponses(res, 400, "Bad Request");
 				return;
 			}
 			const teamRegisterDTO: TeamRegisterDTO = 
@@ -45,9 +48,11 @@ export default class TeamController implements ControllerBase {
 			const message: string = await this.teamService.registerTeam(
 				teamRegisterDTO
 			)
-			if (message !== "SUCCESS") res.status(400).json(ApiResponse.empty());
-			res.json(ApiResponse.complete<null>(message, null));
-				
+			if (message !== "SUCCESS"){
+				sendResponses(res, 400, message);
+				return;
+			};
+			sendResponses(res, 200, message);
 		})
 	}
 }

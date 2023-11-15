@@ -1,7 +1,7 @@
-import UserDTO from "../controllers/dtos/UserDTO";
+
 import User from "../entities/User";
 import AuthModel from "../models/auth.model";
-import Tokenizer from "../utils/tokenizer";
+
 
 
 export default class AuthService{
@@ -15,9 +15,5 @@ export default class AuthService{
     async getUserDataById(id: number): Promise<User>{
         return await this.authModel.getUserDataById(id);
     }
-    async registerUserGuest(user: UserDTO): Promise<any>{
-        const record = await this.authModel.registerUserGuest(user);
-        const message = record["message"] as string;
-        return message;
-    }
+
 }
