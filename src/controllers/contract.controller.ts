@@ -1,8 +1,7 @@
 import { Router } from "express";
-import PlayerContractService from "../services/player_contract.service";
+import PlayerContractService from "../services/contract.service";
 import ControllerBase from "./ControllerBase";
 import ApiResponse from "../utils/http";
-import PlayerContract from "../entities/Contract";
 import ContractRegisterDTO from "./dtos/ContractRegisterDTO";
 import { sendResponses } from "../utils/sendResponses";
 
@@ -42,7 +41,7 @@ export default class PlayerContractController implements ControllerBase{
                 return;
             }
             const playerContract: ContractRegisterDTO = new ContractRegisterDTO(body);
-            const message: string = await this.playerContractService.registerPlayerContract(playerId,playerContract);
+            const message: string = await this.playerContractService.registerPlayerContractByPlayerId(playerId,playerContract);
             console.log(message);
             if (message !== "SUCCESS") {
                 sendResponses(res, 400, message, null);

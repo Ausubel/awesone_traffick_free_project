@@ -199,25 +199,14 @@
 #### BODY RESPONSE
 ```json
 {
-    "message": "Success",
+    "message": "SUCCESS",
     "data": [
         {
-            "id": 1,
-            "transfertDate": "2022-01-01T05:00:00.000Z",
-            "transfertFee": "5000000.00",
-            "contractDurationSeasons": 1,
-            "realeaseClause": "7500000.00",
-            "originalTeamId": 1,
-            "newTeamId": 2
-        },
-        {
-            "id": 2,
-            "transfertDate": "2022-02-01T05:00:00.000Z",
-            "transfertFee": "4000000.00",
-            "contractDurationSeasons": 2,
-            "realeaseClause": "6000000.00",
-            "originalTeamId": 2,
-            "newTeamId": 3
+            "id": 5,
+            "startDate": "2022-01-01T05:00:00.000Z",
+            "endDate": "2023-01-01T05:00:00.000Z",
+            "salary": "5000000.00",
+            "realeaseClause": "7500000.00"
         }
     ]
 }

@@ -1,17 +1,17 @@
 import CarrierStatistics from "./CarreerStatistics";
 
 type Player = {
-    id?: number;
-    firstName: string;
-    lastName: string;
-    dateOfBirth: Date;
-    marketValue: number;
-    currentAgent?: string;
-    country?: string;
+  id?: number;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: Date;
+  marketValue: number;
+  currentAgent?: string;
+  country?: string;
 };
 
 export type ExtendedPlayer = Player & {
-    careerStatistics: CarrierStatistics;
+  careerStatistics: CarrierStatistics;
 };
 
 export default Player;

@@ -109,6 +109,7 @@ CREATE TABLE IF NOT EXISTS transfer (
   FOREIGN KEY (player_id) REFERENCES player (id),
   FOREIGN KEY (transfer_contract_id) REFERENCES transfer_contract (id)
 );
+SET FOREIGN_KEY_CHECKS = ON;
 
 
 -- Insert data into the "country" table
@@ -362,4 +363,20 @@ BEGIN
   SELECT "SUCCESS" as "message";
 END //
 
-call update_player_contract(1, '2022-01-01', '2022-02-01', 1000000, 2000000, 1);
+DROP PROCEDURE IF EXISTS get_all_contracts_by_player_id;
+DELIMITER //
+CREATE PROCEDURE get_all_contracts_by_player_id(
+  IN _player_id INT
+)
+BEGIN
+  DECLARE player_has_contract BOOLEAN;
+
+  SET player_has_contract = EXISTS (SELECT 0 FROM current_contract WHERE player_id = _player_id);
+
+  IF player_has_contract THEN
+    SET @player_contract_id = (SELECT contract_id FROM current_contract WHERE player_id = _player_id);
+    SELECT * FROM contract WHERE id IN (@player_contract_id);
+  ELSE
+    SELECT "Player has no contract" as "message";
+  END IF;
+END

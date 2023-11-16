@@ -3,7 +3,7 @@ import PlayerController from "./player.controller";
 import TeamComtroller from "./team.controller";
 import TransferController from "./transfer.controller";
 import ControllerBase from "./ControllerBase";
-import PlayerContractController from "./player_contracs.controller";
+import ContractsController from "./contract.controller";
 import AuthController from "./auth.controler";
 import RegisterController from "./register.controler";
 
@@ -16,7 +16,7 @@ export default class ControllerInitializer {
 			new PlayerController(),
 			new TeamComtroller(),
 			new TransferController(),
-			new PlayerContractController(),
+			new ContractsController(),
 			new AuthController(),
 			new RegisterController()
 		];
